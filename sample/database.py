@@ -14,8 +14,8 @@ DB_NAME = os.environ.get('DB_NAME', 'sample')
 
 if DB_HOST[0] > '9':
     process = subprocess.Popen(["nslookup", DB_HOST], stdout=subprocess.PIPE)
-    output = process.communicate()[0].decode().split('\n')
-    DB_HOST = output[-3:][0].split(': ')[-1]
+    output = process.communicate()[0].decode().strip().split('\n')
+    DB_HOST = output[-1:][0].split(': ')[-1]
 
 DATABASE_URL = {
     'DEV': 'sqlite:///./dev.db',
